@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test JS Loading</title>
+</head>
+<body>
+    <h1>Testing JavaScript Files</h1>
+    <div id="status"></div>
+    
+    <script>
+        console.log("Test page loaded");
+        
+        // Test if files load
+        const statusDiv = document.getElementById('status');
+        let messages = [];
+        
+        // Check if topics object exists
+        setTimeout(() => {
+            if (typeof topics !== 'undefined') {
+                messages.push('✅ topics.js loaded successfully');
+                messages.push(`✅ Found ${Object.keys(topics).length} topics`);
+            } else {
+                messages.push('❌ topics.js failed to load');
+            }
+            
+            if (typeof sqlQuestions !== 'undefined') {
+                messages.push(`✅ questions.js loaded - ${sqlQuestions.length} questions`);
+            } else {
+                messages.push('❌ questions.js failed to load');
+            }
+            
+            statusDiv.innerHTML = messages.join('<br>');
+            console.log(messages.join('\n'));
+        }, 100);
+    </script>
+    
+    <script src="questions.js"></script>
+    <script src="topics.js"></script>
+    <script src="topics-extended.js"></script>
+    <script src="playground.js"></script>
+    <script src="ai-generator.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

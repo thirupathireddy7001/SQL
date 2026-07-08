@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Interview Preparation - Interactive Learning Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 SQL Interview Preparation</h1>
+            <p class="subtitle">Master SQL with Interactive Learning, 100 Questions & AI Query Generator</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="learn">📚 Learn</button>
+            <button class="tab-btn" data-tab="quiz">🎯 Quiz</button>
+            <button class="tab-btn" data-tab="playground">💻 Playground</button>
+            <button class="tab-btn" data-tab="ai-generator">🤖 AI Query Generator</button>
+        </div>
+
+        <!-- LEARN TAB -->
+        <div class="tab-content active" id="learn-tab">
+            <div class="topics-sidebar">
+                <h3>📖 Topics</h3>
+                <div class="topic-list">
+                    <button class="topic-btn active" data-topic="basics">SQL Basics</button>
+                    <button class="topic-btn" data-topic="select">SELECT Statement</button>
+                    <button class="topic-btn" data-topic="joins">JOINs</button>
+                    <button class="topic-btn" data-topic="subqueries">Subqueries</button>
+                    <button class="topic-btn" data-topic="nested">Nested Subqueries</button>
+                    <button class="topic-btn" data-topic="views">Views</button>
+                    <button class="topic-btn" data-topic="indexes">Indexes</button>
+                    <button class="topic-btn" data-topic="transactions">Transactions</button>
+                    <button class="topic-btn" data-topic="functions">Aggregate Functions</button>
+                    <button class="topic-btn" data-topic="window">Window Functions</button>
+                    <button class="topic-btn" data-topic="acid">ACID Properties</button>
+                    <button class="topic-btn" data-topic="normalization">Normalization</button>
+                    <button class="topic-btn" data-topic="triggers">Triggers</button>
+                </div>
+            </div>
+            <div class="topic-content" id="topic-content">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- QUIZ TAB -->
+        <div class="tab-content" id="quiz-tab">
+            <div class="stats-bar">
+                <div class="stat">
+                    <span class="stat-label">Progress:</span>
+                    <span class="stat-value" id="progress">0/100</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Correct:</span>
+                    <span class="stat-value correct" id="correct">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Wrong:</span>
+                    <span class="stat-value wrong" id="wrong">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Score:</span>
+                    <span class="stat-value" id="score">0%</span>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <label for="difficulty-filter">Filter by Difficulty:</label>
+                <select id="difficulty-filter">
+                    <option value="all">All Questions</option>
+                    <option value="beginner">Beginner (1-40)</option>
+                    <option value="intermediate">Intermediate (41-70)</option>
+                    <option value="advanced">Advanced (71-100)</option>
+                </select>
+                <button id="reset-btn" class="btn-secondary">Reset Progress</button>
+            </div>
+
+            <div class="quiz-container">
+                <div class="question-header">
+                    <span class="question-number" id="question-number">Question 1</span>
+                    <span class="difficulty-badge" id="difficulty-badge">Beginner</span>
+                </div>
+
+                <div class="question-content">
+                    <h2 id="question-text"></h2>
+                    <div class="example-section" id="example-section">
+                        <h3>📝 Example:</h3>
+                        <pre id="example-code"></pre>
+                    </div>
+                </div>
+
+                <div class="options-container" id="options-container"></div>
+
+                <div class="feedback" id="feedback"></div>
+
+                <div class="explanation-section" id="explanation-section" style="display: none;">
+                    <h3>💡 Explanation:</h3>
+                    <p id="explanation-text"></p>
+                </div>
+
+                <div class="navigation">
+                    <button id="prev-btn" class="btn-nav">← Previous</button>
+                    <button id="next-btn" class="btn-nav">Next →</button>
+                </div>
+            </div>
+
+            <div class="summary-section" id="summary-section" style="display: none;">
+                <h2>🎉 Quiz Complete!</h2>
+                <div class="summary-stats">
+                    <p>Total Questions: <strong>100</strong></p>
+                    <p>Correct Answers: <strong id="final-correct">0</strong></p>
+                    <p>Wrong Answers: <strong id="final-wrong">0</strong></p>
+                    <p>Final Score: <strong id="final-score">0%</strong></p>
+                </div>
+                <button id="restart-btn" class="btn-primary">Start Over</button>
+            </div>
+        </div>
+
+        <!-- PLAYGROUND TAB -->
+        <div class="tab-content" id="playground-tab">
+            <div class="playground-container">
+                <div class="playground-header">
+                    <h2>💻 SQL Query Playground</h2>
+                    <p>Write and test SQL queries with sample data</p>
+                </div>
+
+                <div class="playground-controls">
+                    <button id="run-query-btn" class="btn-primary">▶ Run Query</button>
+                    <button id="clear-query-btn" class="btn-secondary">🗑️ Clear</button>
+                    <select id="sample-tables">
+                        <option value="">Load Sample Table...</option>
+                        <option value="employees">Employees Table</option>
+                        <option value="orders">Orders Table</option>
+                        <option value="customers">Customers Table</option>
+                    </select>
+                </div>
+
+                <div class="editor-section">
+                    <h3>Query Editor</h3>
+                    <textarea id="sql-editor" placeholder="-- Write your SQL query here
+SELECT * FROM employees;"></textarea>
+                </div>
+
+                <div class="results-section">
+                    <h3>Results</h3>
+                    <div id="query-results"></div>
+                </div>
+
+                <div class="sample-data-section">
+                    <h3>Sample Data</h3>
+                    <div id="sample-data-display"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI GENERATOR TAB -->
+        <div class="tab-content" id="ai-generator-tab">
+            <div class="ai-generator-container">
+                <div class="ai-header">
+                    <h2>🤖 AI SQL Query Generator</h2>
+                    <p>Describe what you want in plain English, and get SQL queries instantly!</p>
+                </div>
+
+                <div class="ai-input-section">
+                    <label for="ai-prompt">Describe your query:</label>
+                    <textarea id="ai-prompt" placeholder="Example: Get all employees who earn more than 50000 and work in IT department"></textarea>
+                    <button id="generate-query-btn" class="btn-primary">✨ Generate SQL Query</button>
+                </div>
+
+                <div class="ai-output-section" id="ai-output" style="display: none;">
+                    <h3>Generated Query:</h3>
+                    <pre id="generated-query"></pre>
+                    <div class="ai-explanation">
+                        <h4>Explanation:</h4>
+                        <p id="query-explanation"></p>
+                    </div>
+                    <button id="copy-query-btn" class="btn-secondary">📋 Copy Query</button>
+                    <button id="test-query-btn" class="btn-primary">▶ Test in Playground</button>
+                </div>
+
+                <div class="ai-examples">
+                    <h3>💡 Example Prompts:</h3>
+                    <div class="example-prompts">
+                        <button class="example-prompt-btn">Get all customers from New York</button>
+                        <button class="example-prompt-btn">Find the top 5 highest paid employees</button>
+                        <button class="example-prompt-btn">Count orders by customer</button>
+                        <button class="example-prompt-btn">Join employees with their departments</button>
+                        <button class="example-prompt-btn">Get employees hired in the last year</button>
+                        <button class="example-prompt-btn">Find duplicate email addresses</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="topics.js"></script>
+    <script src="topics-extended.js"></script>
+    <script src="playground.js"></script>
+    <script src="ai-generator.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
